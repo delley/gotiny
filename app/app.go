@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -16,13 +17,13 @@ func NewServer() Server {
 }
 
 // Init inicializa a configuracao do servidor
-func (s *Server) Init() {
+func (s *Server) Init(port string) {
 	log.Println("Initializing server...")
-	s.port = ":8080"
+	s.port = fmt.Sprintf(":%s", port)
 }
 
 // Start iniciar o servidor
 func (s *Server) Start() {
-	log.Println("Starting server...")
+	log.Println("Starting server on port", s.port)
 	http.ListenAndServe(s.port, nil)
 }
